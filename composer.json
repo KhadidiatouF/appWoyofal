@@ -1,0 +1,19 @@
+{
+    "name": "appwoyofal/appwoyofal",
+    "description": "khadija",
+    "autoload": {
+        "psr-4": {
+            "Appwoyofal\\Appwoyofal\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Khadidiatou",
+            "email": "jamiral2019@gmail.com"
+        }
+    ],
+    "require": {},
+    "minimum-stability": "stable",
+    "type": "project"
+
+}
