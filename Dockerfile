@@ -1,28 +1,34 @@
-FROM php:8.2-fpm
+FROM php:8.2-cli-alpine
 
-# Installer extensions PHP et outils nécessaires
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    unzip \
+# Installer dépendances nécessaires
+RUN apk add --no-cache \
+    curl \
     zip \
+    unzip \
     git \
-    && docker-php-ext-install pdo pdo_pgsql \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    postgresql-dev \
+    libpq
+
+# Installer les extensions PHP
+RUN docker-php-ext-install \
+    pdo \
+    pdo_pgsql \
+    pgsql
 
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Définir dossier de travail
+# Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Copier tout le projet dans le container
+# Copier les fichiers de l’application
 COPY . .
 
-# Installer dépendances PHP via Composer
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+# Installer les dépendances PHP
+RUN composer install --no-dev --optimize-autoloader
 
-# Exposer le port 80
+# Exposer le port HTTP (8000 par convention)
 EXPOSE 80
 
-# Lancer le serveur PHP intégré sur le port 80, dossier public
+# Commande de démarrage avec le serveur PHP intégré
 CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
