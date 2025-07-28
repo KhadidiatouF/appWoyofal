@@ -1,34 +1,50 @@
-FROM php:8.2-cli-alpine
+FROM php:8.2-fpm-alpine
 
-# Installer dépendances nécessaires
+# Installation des dépendances système
 RUN apk add --no-cache \
-    curl \
+    nginx \
+    supervisor \
+    postgresql-dev \
     zip \
     unzip \
     git \
-    postgresql-dev \
-    libpq
+    curl
 
-# Installer les extensions PHP
+# Installation des extensions PHP
 RUN docker-php-ext-install \
     pdo \
     pdo_pgsql \
     pgsql
 
-# Installer Composer
+# Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Définir le répertoire de travail
+# Configuration du répertoire de travail
 WORKDIR /var/www/html
 
-# Copier les fichiers de l’application
+# Copie des fichiers de l'application
 COPY . .
 
-# Installer les dépendances PHP
+# Installation des dépendances PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Exposer le port HTTP (8000 par convention)
+# Configuration des permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+
+# Configuration Nginx
+COPY docker/nginx.conf /etc/nginx/nginx.conf
+COPY docker/default.conf /etc/nginx/conf.d/default.conf
+
+# Configuration Supervisor
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Script de démarrage
+COPY docker/start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Exposition du port
 EXPOSE 80
 
-# Commande de démarrage avec le serveur PHP intégré
-CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
+# Commande de démarrage
+CMD ["/start.sh"]

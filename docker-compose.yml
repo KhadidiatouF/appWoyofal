@@ -27,7 +27,7 @@ services:
       - POSTGRES_USER=woyofal_user
       - POSTGRES_PASSWORD=woyofal_password
     ports:
-      - "5436:5432"
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./migrations:/docker-entrypoint-initdb.d

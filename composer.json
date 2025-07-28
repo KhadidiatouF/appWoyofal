@@ -3,7 +3,18 @@
     "description": "khadija",
     "autoload": {
         "psr-4": {
-            "Appwoyofal\\Appwoyofal\\": "src/"
+            "Appwoyofal\\Appwoyofal\\": "src/",
+            "App\\Core\\Abstract\\":"app/core/abstract/",
+            "App\\Config\\":"app/config/",
+            "App\\Core\\":"app/core/",
+            "App\\Core\\Middlewares\\":"app/core/middlewares/",
+            "App\\Service\\":"src/service/",
+            "App\\Entity\\":"src/entity/",
+            "App\\Repository\\":"src/repository/",
+            "App\\Controller\\":"src/controller/",
+            "App\\Migrations\\":"migrations/",
+            "App\\Seeders\\":"seeders/" 
+
         }
     },
     "authors": [
@@ -12,7 +23,10 @@
             "email": "jamiral2019@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "symfony/yaml": "^7.3"
+    },
     "minimum-stability": "stable",
     "type": "project"
 

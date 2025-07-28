@@ -1,3 +1,8 @@
 <?php
+declare(strict_types=1);
 
-echo "Hello, World! This is the public index.php file.";
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../app/config/bootstrap.php';
+
+
+$router->resolve($router);
