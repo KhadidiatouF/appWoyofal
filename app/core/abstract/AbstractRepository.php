@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Core\Abstract;
-use App\core\App;
-use App\core\Database;
-use App\core\Singleton;
+use App\Core\App;
+use App\Core\Database;
+use App\Core\Singleton;
+use PDO;
 
 class AbstractRepository extends Singleton
 {
-    protected Database $db;
+   protected PDO $pdo;
 
-    public function __construct(Database $db){
-        $this->db = $db;
-    }
+   public function __construct(PDO $pdo)
+   {
+    $this->pdo=$pdo;
+   }
 }

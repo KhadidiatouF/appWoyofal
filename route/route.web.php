@@ -1,6 +1,6 @@
 <?php
 
 
-return [
+return $routes = [
     ['POST', '/achat', [WoyofalController::class, 'acheter']],
 ];

@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Abstract;
-use App\core\Session;
-use App\core\App;
+use App\Core\Session;
+use App\Core\App;
 
 abstract class AbstractController
 {

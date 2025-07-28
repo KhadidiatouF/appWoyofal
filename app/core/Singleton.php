@@ -1,6 +1,6 @@
 <?php
 
-namespace App\core;
+namespace App\Core;
 
 use ReflectionClass;
 
@@ -13,10 +13,8 @@ class Singleton {
         if (!isset(self::$instances[$class])) {
             $reflector = new ReflectionClass($class);
 
-            // On crée l'objet sans appeler le constructeur
             $instance = $reflector->newInstanceWithoutConstructor();
 
-            // On appelle le constructeur privé/protégé manuellement
             $constructor = $reflector->getConstructor();
             if ($constructor) {
                 $constructor->setAccessible(true);

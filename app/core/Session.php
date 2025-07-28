@@ -1,7 +1,7 @@
 <?php
-namespace App\core;
+namespace App\Core;
 
-use App\core\Singleton;
+use App\Core\Singleton;
 
 
 class Session extends Singleton{

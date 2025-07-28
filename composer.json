@@ -12,8 +12,8 @@
             "App\\Entity\\":"src/entity/",
             "App\\Repository\\":"src/repository/",
             "App\\Controller\\":"src/controller/",
-            "App\\Migrations\\":"migrations/",
-            "App\\Seeders\\":"seeders/" 
+            "App\\Migrations\\":"migration/",
+            "App\\Seeders\\":"seeder/" 
 
         }
     },

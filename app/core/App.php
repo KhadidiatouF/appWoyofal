@@ -1,6 +1,6 @@
 <?php
 
-namespace App\core;
+namespace App\Core;
 
 use Symfony\Component\Yaml\Yaml;
 use ReflectionClass;
@@ -17,12 +17,11 @@ class App {
     }
 
     public static function getDependency(string $className) {
-        // Si déjà instanciée, on la renvoie
+        
         if (isset(self::$instances[$className])) {
             return self::$instances[$className];
         }
 
-        // Si la classe n'existe pas
         if (!class_exists($className)) {
             throw new \Exception("Classe $className introuvable");
         }
@@ -31,7 +30,6 @@ class App {
         $constructor = $reflector->getConstructor();
 
         if (!$constructor) {
-            // Pas de constructeur → simple instance
             $instance = new $className();
         } else {
             $params = $constructor->getParameters();
@@ -40,16 +38,15 @@ class App {
             foreach ($params as $param) {
                 $type = $param->getType();
                 if ($type && !$type->isBuiltin()) {
-                    $depClass = $type->getName(); // nom de la classe
-                    $dependencies[] = self::getDependency($depClass); // injection récursive
+                    $depClass = $type->getName(); 
+                    $dependencies[] = self::getDependency($depClass);
                 } else {
-                    // Valeurs par défaut si existantes
+
                     $dependencies[] = $param->isDefaultValueAvailable()
                         ? $param->getDefaultValue()
                         : null;
                 }
             }
-            // var_dump($reflector); die;
             if (method_exists($className, 'getInstance')) {
                 $instance = $className::getInstance(...$dependencies);
             } else {

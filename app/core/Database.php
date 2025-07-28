@@ -1,9 +1,9 @@
 <?php
 
-namespace App\core;
+namespace App\Core;
 use PDO;
 use PDOException;
-use App\core\Singleton;
+use App\Core\Singleton;
 
 class Database extends Singleton{
     public PDO $pdo;
@@ -11,7 +11,6 @@ class Database extends Singleton{
     private function __construct(){
         try{
             $this->pdo = new PDO(DSN, USER, PASSWORD);
-            // echo "Connected to the database";
         }catch(PDOException $e){
             echo "Error: " . $e->getMessage();
         }

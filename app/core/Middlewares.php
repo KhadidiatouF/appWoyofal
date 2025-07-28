@@ -1,8 +1,8 @@
 <?php
 
-namespace App\core;
+namespace App\Core;
 
-use App\core\middlewares\Auth;
+use App\Core\Middlewares\Auth;
 
 class Middlewares {
     private static array $middlewares = [

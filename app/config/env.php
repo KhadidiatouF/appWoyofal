@@ -17,15 +17,6 @@ use Dotenv\Dotenv;
         define('PASSWORD', $_ENV['DB_PASSWORD']);
         define('URL', $_ENV['WEB_ROUTE']);
 
-        define('SID', $_ENV['TWILIO_SID']);
-        define('TOKEN', $_ENV['TWILIO_TOKEN']);
-        define('PHONE', $_ENV['TWILIO_PHONE']);
-        define('FROM', $_ENV['TWILIO_FROM']);
-
-
-        define('CLOUD_NAME', $_ENV['CLOUD_NAME']);
-        define('CLOUD_KEY', $_ENV['CLOUD_KEY']);
-        define('CLOUD_SECRET', $_ENV['CLOUD_SECRET']);
 
 
  
